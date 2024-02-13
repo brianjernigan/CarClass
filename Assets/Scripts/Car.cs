@@ -6,7 +6,7 @@ using UnityEngine;
 public class Car
 {
     private int _year;
-    private String _make;
+    private string _make;
     private const int _maxSpeed = 100;
     private int _currentSpeed;
 
@@ -16,7 +16,7 @@ public class Car
         set => _year = value;
     }
 
-    public String Make
+    public string Make
     {
         get => _make;
         set => _make = value;

@@ -19,12 +19,12 @@ public class InputHandler : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            newCar.Accelerate(10);
+            newCar.Accelerate(1);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            newCar.Decelerate(10);
+            newCar.Decelerate(1);
         }
 
         Debug.Log(newCar);
