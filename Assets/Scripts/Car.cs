@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class Car
 {
-    
+    private String _make;
 }
