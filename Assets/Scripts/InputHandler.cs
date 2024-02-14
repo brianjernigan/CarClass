@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class InputHandler : MonoBehaviour
 {
@@ -29,40 +30,37 @@ public class InputHandler : MonoBehaviour
 
     public void OnClickDriveButton()
     {
-        var userInput = ValidateUserInput();
-        _newCar = new Car(userInput.year, userInput.make);
+        if (!UserInputIsValidated())
+        {
+            _gameText.text = "Invalid Input. Please enter a Year between 1886 and 2024, and a non-empty Make.";
+            return;
+        }
+
+        _newCar = new Car(int.Parse(_yearInput.text), _makeInput.text);
         UpdateGameText();
     }
 
-    private (int year, string make) ValidateUserInput()
+    private bool UserInputIsValidated()
     {
-        return (ValidateYearInput(), ValidateMakeInput());
+        if (!YearInputIsValidated() || !MakeInputIsValidated()) return false;
+
+        return true;
     }
 
-    private int ValidateYearInput()
-    {
-        var yearInputInt = int.Parse(_yearInput.text);
-        if (yearInputInt < 1886 || yearInputInt > 2024)
-        {
-            _gameText.text = "Invalid Year";
-            return 0;
-        } else
-        {
-            return yearInputInt;
-        }
-    }
-
-    private string ValidateMakeInput()
+    private bool MakeInputIsValidated()
     {
         var makeInputString = _makeInput.text;
-        if (makeInputString == null)
-        {
-            _gameText.text = "Invalid Make";
-            return null;
-        } else
-        {
-            return makeInputString;
-        }
+        if (string.IsNullOrWhiteSpace(makeInputString)) return false;
+
+        return true;
+    }
+
+    private bool YearInputIsValidated()
+    {
+        var yearInputInt = int.Parse(_yearInput.text);
+        if (yearInputInt < 1886 || yearInputInt > 2024) return false;
+
+        return true;
     }
 
     private void UpdateGameText()
