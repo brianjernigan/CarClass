@@ -9,24 +9,33 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private TMP_InputField _yearInput;
     [SerializeField] private TMP_InputField _makeInput;
 
-    private Car newCar;
+    [SerializeField] private TMP_Text _gameText;
 
-    private void Start()
-    {
-        newCar = new Car(1922, "Mustang");
-    }
+    private Car _newCar;
+
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            newCar.Accelerate(1);
+            _newCar.Accelerate(1);
+            UpdateGameText();
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            newCar.Decelerate(1);
+            _newCar.Decelerate(1);
+            UpdateGameText();
         }
+    }
 
-        Debug.Log(newCar);
+    public void OnClickDriveButton()
+    {
+        _newCar = new Car(1999, "Mustang");
+        UpdateGameText();
+    }
+
+    private void UpdateGameText()
+    {
+        _gameText.text = _newCar.ToString();
     }
 }
