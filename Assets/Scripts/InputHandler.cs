@@ -49,18 +49,15 @@ public class InputHandler : MonoBehaviour
 
     private bool UserInputIsValidated()
     {
-        if (!YearInputIsValidated() || !MakeInputIsValidated()) return false;
-
-        return true;
+        return YearInputIsValidated() && MakeInputIsValidated();
     }
 
     // Ensure make has a non-empty value
     private bool MakeInputIsValidated()
     {
         var makeInputString = _makeInput.text;
-        if (string.IsNullOrWhiteSpace(makeInputString)) return false;
-
-        return true;
+        // Return true if string is not null or whitespace
+        return !string.IsNullOrWhiteSpace(makeInputString);
     }
 
     // Ensure year is not less than 1886 or greater than current year
@@ -68,14 +65,13 @@ public class InputHandler : MonoBehaviour
     {
         // TMP Input Field already handles integer input so we know this can be parsed
         var yearInputInt = int.Parse(_yearInput.text);
-        if (yearInputInt < 1886 || yearInputInt > 2024) return false;
-
-        return true;
+        // C# patterns!!
+        return yearInputInt is >= 1886 and <= 2024;
     }
 
     // Sets on-screen text to car's current status
     private void UpdateGameText()
     {
-        _gameText.text = _newCar.ToString();
+        _gameText.text = $"The {_newCar.Year} {_newCar.Make} is currently going {_newCar.CurrentSpeed} mph.";
     }
 }

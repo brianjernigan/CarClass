@@ -25,6 +25,8 @@ public class Car
         set => _make = value;
     }
 
+    public int CurrentSpeed => _currentSpeed;
+
     public Car(int year, string make)
     {
         _year = year;
@@ -50,9 +52,9 @@ public class Car
         }
     }
 
-    // For printing the car on-screen
-    public override string ToString()
-    {
-        return $"The {_year} {_make} is currently going {_currentSpeed} mph.";
-    }
+    // Nixed this to demonstrate use of properties
+    // public override string ToString()
+    // {
+    //     return $"The {_year} {_make} is currently going {_currentSpeed} mph.";
+    // }
 }
