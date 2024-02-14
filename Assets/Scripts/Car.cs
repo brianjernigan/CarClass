@@ -1,7 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Car Class
+//Name: Brian Jernigan
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 02/19/2024
+/////////////////////////////////////////////
 
 public class Car
 {
@@ -31,6 +34,7 @@ public class Car
 
     public void Accelerate (int gain)
     {
+        // Do not increase past max value
         if (_currentSpeed + gain <= MaxSpeed)
         {
             _currentSpeed += gain;
@@ -39,12 +43,14 @@ public class Car
 
     public void Decelerate (int loss)
     {
+        // Do not decrease past 0
         if (_currentSpeed - loss >= 0)
         {
             _currentSpeed -= loss;
         }
     }
 
+    // For printing the car on-screen
     public override string ToString()
     {
         return $"The {_year} {_make} is currently going {_currentSpeed} mph.";
