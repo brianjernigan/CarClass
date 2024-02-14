@@ -13,7 +13,6 @@ public class InputHandler : MonoBehaviour
 
     private Car _newCar;
 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
@@ -30,8 +29,40 @@ public class InputHandler : MonoBehaviour
 
     public void OnClickDriveButton()
     {
-        _newCar = new Car(1999, "Mustang");
+        var userInput = ValidateUserInput();
+        _newCar = new Car(userInput.year, userInput.make);
         UpdateGameText();
+    }
+
+    private (int year, string make) ValidateUserInput()
+    {
+        return (ValidateYearInput(), ValidateMakeInput());
+    }
+
+    private int ValidateYearInput()
+    {
+        var yearInputInt = int.Parse(_yearInput.text);
+        if (yearInputInt < 1886 || yearInputInt > 2024)
+        {
+            _gameText.text = "Invalid Year";
+            return 0;
+        } else
+        {
+            return yearInputInt;
+        }
+    }
+
+    private string ValidateMakeInput()
+    {
+        var makeInputString = _makeInput.text;
+        if (makeInputString == null)
+        {
+            _gameText.text = "Invalid Make";
+            return null;
+        } else
+        {
+            return makeInputString;
+        }
     }
 
     private void UpdateGameText()

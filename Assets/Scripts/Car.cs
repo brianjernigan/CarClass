@@ -7,7 +7,7 @@ public class Car
 {
     private int _year;
     private string _make;
-    private const int _maxSpeed = 100;
+    private const int MaxSpeed = 100;
     private int _currentSpeed;
 
     public int Year
@@ -22,9 +22,16 @@ public class Car
         set => _make = value;
     }
 
+    public Car(int year, string make)
+    {
+        _year = year;
+        _make = make;
+        _currentSpeed = 0;
+    }
+
     public void Accelerate (int gain)
     {
-        if (_currentSpeed + gain <= _maxSpeed)
+        if (_currentSpeed + gain <= MaxSpeed)
         {
             _currentSpeed += gain;
         }
@@ -36,13 +43,6 @@ public class Car
         {
             _currentSpeed -= loss;
         }
-    }
-
-    public Car (int year, string make)
-    {
-        _year = year;
-        _make = make;
-        _currentSpeed = 0;
     }
 
     public override string ToString()
